@@ -16,11 +16,11 @@ namespace DataAceess.Repositories
         //protected DbSet<T> _ctx.Set<T>();
         protected DbContext _ctx;
 
-        public BaseRepository(DbContext dbContext)
-        {
-            //_ctx.Set<T>() = dbContext.Set<T>();
-            _ctx = dbContext;
-        }
+        //public BaseRepository(DbContext dbContext)
+        //{
+        //    //_ctx.Set<T>() = dbContext.Set<T>();
+        //    _ctx = dbContext;
+        //}
         public BaseRepository()
         {
         }

@@ -19,14 +19,19 @@ namespace DataAceess
 
         public DbContext _ctx { get; private set; }
 
-        public UnitOfWork(AttendanceEntities CTX)
+        public UnitOfWork(AttendanceEntities CTX,
+            IEmployeRepository employeRepository,
+            IBaseRepository<Branch> branchRepository,
+            IBaseRepository<FingerPrintDevice> devicesRepository,
+            IBaseRepository<AttendanceLog> logsRepository
+            )
         {
             _ctx = CTX;
 
-            EmployeRepo = new EmployesRepo();
-            BranchesRepo = new BaseRepository<Branch>();
-            DevicesRepo = new BaseRepository<FingerPrintDevice>();
-            LogsRepo = new BaseRepository<AttendanceLog>();
+            EmployeRepo = employeRepository;
+            BranchesRepo = branchRepository;
+            DevicesRepo = devicesRepository;
+            LogsRepo = logsRepository;
 
 
             EmployeRepo.SetContext(_ctx);

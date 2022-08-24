@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace DataAceess.Repositories
 {
-    public class EmployesRepo : BaseRepository<Employe>, IEmployeRepository
+    public class EmployesRepository : BaseRepository<Employe>, IEmployeRepository
     {
         //public EmployesRepo(DbContext ctx):base(ctx)
         //{
         //    //_ctx = ctx;
         //}
-        public EmployesRepo():base()
+        public EmployesRepository():base()
         {
 
         }
