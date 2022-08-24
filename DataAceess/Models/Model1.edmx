@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AttendanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AttendanceLogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="EmployeID" Type="int" Nullable="false" />
+          <Property Name="LogTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="LogType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Desc" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchID" Type="int" />
+        </EntityType>
+        <EntityType Name="FingerPrintDevice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationDesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="IP" Type="nvarchar" MaxLength="50" />
+          <Property Name="Port" Type="tinyint" />
+          <Property Name="Mac" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchID" Type="int" />
+        </EntityType>
+        <Association Name="FK_AttendanceLogs_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="AttendanceLogs" Type="Self.AttendanceLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttendanceLogs">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceLogs_FingerPrintDevice">
+          <End Role="FingerPrintDevice" Type="Self.FingerPrintDevice" Multiplicity="1" />
+          <End Role="AttendanceLogs" Type="Self.AttendanceLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FingerPrintDevice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttendanceLogs">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FingerPrintDevice_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="FingerPrintDevice" Type="Self.FingerPrintDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FingerPrintDevice">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AttendanceModelStoreContainer">
+          <EntitySet Name="AttendanceLogs" EntityType="Self.AttendanceLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FingerPrintDevice" EntityType="Self.FingerPrintDevice" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AttendanceLogs_Employe" Association="Self.FK_AttendanceLogs_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="AttendanceLogs" EntitySet="AttendanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceLogs_FingerPrintDevice" Association="Self.FK_AttendanceLogs_FingerPrintDevice">
+            <End Role="FingerPrintDevice" EntitySet="FingerPrintDevice" />
+            <End Role="AttendanceLogs" EntitySet="AttendanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employe_Branch" Association="Self.FK_Employe_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Employe" EntitySet="Employe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FingerPrintDevice_Branch" Association="Self.FK_FingerPrintDevice_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="FingerPrintDevice" EntitySet="FingerPrintDevice" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AttendanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AttendanceLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeID" Type="Int32" Nullable="false" />
+          <Property Name="LogTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="LogType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_AttendanceLogs_Employe" FromRole="AttendanceLogs" ToRole="Employe" />
+          <NavigationProperty Name="FingerPrintDevice" Relationship="Self.FK_AttendanceLogs_FingerPrintDevice" FromRole="AttendanceLogs" ToRole="FingerPrintDevice" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employes" Relationship="Self.FK_Employe_Branch" FromRole="Branch" ToRole="Employe" />
+          <NavigationProperty Name="FingerPrintDevices" Relationship="Self.FK_FingerPrintDevice_Branch" FromRole="Branch" ToRole="FingerPrintDevice" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchID" Type="Int32" />
+          <NavigationProperty Name="AttendanceLogs" Relationship="Self.FK_AttendanceLogs_Employe" FromRole="Employe" ToRole="AttendanceLogs" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_Employe_Branch" FromRole="Employe" ToRole="Branch" />
+        </EntityType>
+        <EntityType Name="FingerPrintDevice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="Byte" />
+          <Property Name="Mac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchID" Type="Int32" />
+          <NavigationProperty Name="AttendanceLogs" Relationship="Self.FK_AttendanceLogs_FingerPrintDevice" FromRole="FingerPrintDevice" ToRole="AttendanceLogs" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_FingerPrintDevice_Branch" FromRole="FingerPrintDevice" ToRole="Branch" />
+        </EntityType>
+        <Association Name="FK_AttendanceLogs_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+          <End Role="AttendanceLogs" Type="Self.AttendanceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttendanceLogs">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceLogs_FingerPrintDevice">
+          <End Role="FingerPrintDevice" Type="Self.FingerPrintDevice" Multiplicity="1" />
+          <End Role="AttendanceLogs" Type="Self.AttendanceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FingerPrintDevice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttendanceLogs">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FingerPrintDevice_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="FingerPrintDevice" Type="Self.FingerPrintDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FingerPrintDevice">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AttendanceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AttendanceLogs" EntityType="Self.AttendanceLog" />
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Employes" EntityType="Self.Employe" />
+          <EntitySet Name="FingerPrintDevices" EntityType="Self.FingerPrintDevice" />
+          <AssociationSet Name="FK_AttendanceLogs_Employe" Association="Self.FK_AttendanceLogs_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="AttendanceLogs" EntitySet="AttendanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceLogs_FingerPrintDevice" Association="Self.FK_AttendanceLogs_FingerPrintDevice">
+            <End Role="FingerPrintDevice" EntitySet="FingerPrintDevices" />
+            <End Role="AttendanceLogs" EntitySet="AttendanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employe_Branch" Association="Self.FK_Employe_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Employe" EntitySet="Employes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FingerPrintDevice_Branch" Association="Self.FK_FingerPrintDevice_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="FingerPrintDevice" EntitySet="FingerPrintDevices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AttendanceModelStoreContainer" CdmEntityContainer="AttendanceEntities">
+          <EntitySetMapping Name="AttendanceLogs">
+            <EntityTypeMapping TypeName="AttendanceModel.AttendanceLog">
+              <MappingFragment StoreEntitySet="AttendanceLogs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="AttendanceModel.Branch">
+              <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employes">
+            <EntityTypeMapping TypeName="AttendanceModel.Employe">
+              <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FingerPrintDevices">
+            <EntityTypeMapping TypeName="AttendanceModel.FingerPrintDevice">
+              <MappingFragment StoreEntitySet="FingerPrintDevice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="LocationDesc" ColumnName="LocationDesc" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="Mac" ColumnName="Mac" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
