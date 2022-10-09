@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace MiddleWare
 {
-    public partial class Service1 : ServiceBase
+    public partial class STS_ZK_Comm : ServiceBase
     {
-        public Service1()
+        public STS_ZK_Comm()
         {
             InitializeComponent();
         }

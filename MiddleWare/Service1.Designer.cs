@@ -1,6 +1,6 @@
 ﻿namespace MiddleWare
 {
-    partial class Service1
+    partial class STS_ZK_Comm
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            // 
+            // STS_ZK_Comm
+            // 
             this.ServiceName = "Service1";
+
         }
 
         #endregion
