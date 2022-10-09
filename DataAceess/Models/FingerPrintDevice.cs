@@ -29,6 +29,11 @@ namespace DataAceess.Models
         public string Mac { get; set; }
         public string Model { get; set; }
         public Nullable<int> BranchID { get; set; }
+        public string Vendor { get; set; }
+        public string SerialNumber { get; set; }
+        public string FirmwareVer { get; set; }
+        public string Platform { get; set; }
+        public Nullable<System.DateTime> ProductionTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AttendanceLog> AttendanceLogs { get; set; }

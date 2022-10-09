@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AttendanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AttendanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AttendanceLogs">
           <Key>
             <PropertyRef Name="ID" />
@@ -45,6 +45,11 @@
           <Property Name="Mac" Type="nvarchar" MaxLength="50" />
           <Property Name="Model" Type="nvarchar" MaxLength="50" />
           <Property Name="BranchID" Type="int" />
+          <Property Name="Vendor" Type="nvarchar" MaxLength="100" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirmwareVer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Platform" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductionTime" Type="datetime" />
         </EntityType>
         <Association Name="FK_AttendanceLogs_Employe">
           <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
@@ -116,8 +121,7 @@
             <End Role="FingerPrintDevice" EntitySet="FingerPrintDevice" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AttendanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -169,6 +173,11 @@
           <Property Name="BranchID" Type="Int32" />
           <NavigationProperty Name="AttendanceLogs" Relationship="Self.FK_AttendanceLogs_FingerPrintDevice" FromRole="FingerPrintDevice" ToRole="AttendanceLogs" />
           <NavigationProperty Name="Branch" Relationship="Self.FK_FingerPrintDevice_Branch" FromRole="FingerPrintDevice" ToRole="Branch" />
+          <Property Name="Vendor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirmwareVer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Platform" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_AttendanceLogs_Employe">
           <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
@@ -279,6 +288,11 @@
           <EntitySetMapping Name="FingerPrintDevices">
             <EntityTypeMapping TypeName="AttendanceModel.FingerPrintDevice">
               <MappingFragment StoreEntitySet="FingerPrintDevice">
+                <ScalarProperty Name="ProductionTime" ColumnName="ProductionTime" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+                <ScalarProperty Name="FirmwareVer" ColumnName="FirmwareVer" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Desc" ColumnName="Desc" />
