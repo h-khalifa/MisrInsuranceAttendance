@@ -9,6 +9,6 @@ namespace DataAceess.Interfaces
 {
     public interface IEmployeRepository : IBaseRepository<Employe>
     {
-        Employe GetEmployeByCode(string code);
+        Employe GetOrCreateEmployeByCode(string code);
     }
 }

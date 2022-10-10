@@ -21,9 +21,19 @@ namespace DataAceess.Repositories
 
         }
         
-        public Employe GetEmployeByCode(string code)
+        public Employe GetOrCreateEmployeByCode(string code)
         {
-            return _ctx.Set<Employe>().SingleOrDefault(e => e.Code == code);
+            var employee = _ctx.Set<Employe>().SingleOrDefault(e => e.Code == code);
+            if(employee == null)
+            {
+                employee = new Employe()
+                {
+                    Code = code,
+                };
+                _ctx.Set<Employe>().Add(employee);
+                _ctx.SaveChanges();
+            }
+            return employee;
         }
     }
 }

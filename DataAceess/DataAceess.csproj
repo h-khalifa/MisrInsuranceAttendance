@@ -54,12 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="Repositories\EmployesRepo.cs" />
-    <Compile Include="Enums\OrderBy.cs" />
-    <Compile Include="Interfaces\IBaseRepository.cs" />
-    <Compile Include="Interfaces\IEmploye.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\AttendanceLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -72,6 +66,12 @@
     <Compile Include="Models\FingerPrintDevice.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\EmployesRepo.cs" />
+    <Compile Include="Enums\OrderBy.cs" />
+    <Compile Include="Interfaces\IBaseRepository.cs" />
+    <Compile Include="Interfaces\IEmploye.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

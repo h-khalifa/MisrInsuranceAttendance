@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="936f8698d17442758a546de6bf89d129" Name="Diagram1">
-        <EntityTypeShape EntityType="AttendanceModel.AttendanceLog" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AttendanceModel.Branch" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AttendanceModel.Employe" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AttendanceModel.FingerPrintDevice" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <AssociationConnector Association="AttendanceModel.FK_AttendanceLogs_Employe" ManuallyRouted="false" />
-        <AssociationConnector Association="AttendanceModel.FK_AttendanceLogs_FingerPrintDevice" ManuallyRouted="false" />
-        <AssociationConnector Association="AttendanceModel.FK_Employe_Branch" ManuallyRouted="false" />
-        <AssociationConnector Association="AttendanceModel.FK_FingerPrintDevice_Branch" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AttendanceModel.AttendanceLog" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="AttendanceModel.Branch" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="AttendanceModel.Employe" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="AttendanceModel.FingerPrintDevice" Width="1.5" PointX="3" PointY="4.25" />
+        <AssociationConnector Association="AttendanceModel.FK_AttendanceLogs_Employe" />
+        <AssociationConnector Association="AttendanceModel.FK_AttendanceLogs_FingerPrintDevice" />
+        <AssociationConnector Association="AttendanceModel.FK_Employe_Branch" />
+        <AssociationConnector Association="AttendanceModel.FK_FingerPrintDevice_Branch" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

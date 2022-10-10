@@ -34,6 +34,7 @@ namespace DataAceess.Models
         public string FirmwareVer { get; set; }
         public string Platform { get; set; }
         public Nullable<System.DateTime> ProductionTime { get; set; }
+        public Nullable<System.DateTime> LatestLogTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AttendanceLog> AttendanceLogs { get; set; }

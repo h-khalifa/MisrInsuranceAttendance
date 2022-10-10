@@ -17,7 +17,7 @@ namespace DataAceess.Models
         public long ID { get; set; }
         public int DeviceID { get; set; }
         public int EmployeID { get; set; }
-        public System.TimeSpan LogTime { get; set; }
+        public System.DateTime LogTime { get; set; }
         public string LogType { get; set; }
     
         public virtual Employe Employe { get; set; }
