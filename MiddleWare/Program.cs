@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using MiddleWare.Helpers;
+using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Triggers;
 using System;
@@ -18,6 +19,7 @@ namespace MiddleWare
         static void Main()
         {
             TasksScheduling();
+            LogUtil.Debug("SERVICE STARTED!");
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]

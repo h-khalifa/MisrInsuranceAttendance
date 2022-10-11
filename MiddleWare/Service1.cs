@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiddleWare.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +20,12 @@ namespace MiddleWare
 
         protected override void OnStart(string[] args)
         {
+            LogUtil.Debug("SERVICE STARTED!");
         }
 
         protected override void OnStop()
         {
+            LogUtil.Debug("SERVICE STOPPED!");
         }
     }
 }

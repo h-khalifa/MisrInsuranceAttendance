@@ -1,4 +1,5 @@
-﻿using MiddleWare.ZK.models;
+﻿using MiddleWare.Helpers;
+using MiddleWare.ZK.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace MiddleWare.ZK
                 res = axCZKEM1.GetSerialNumber(machineNumber, out sn);
                 if (res)
                 {
-                    Console.WriteLine("1. Serial Number: " + sn);
+                    LogUtil.Debug("1. Serial Number: " + sn);
                     device.Serial = sn;
                 }
                 else
@@ -67,7 +68,7 @@ namespace MiddleWare.ZK
                 res = axCZKEM1.GetDeviceMAC(machineNumber, ref mac);
                 if (res)
                 {
-                    Console.WriteLine("2. Mac Address: " + mac);
+                    LogUtil.Debug("2. Mac Address: " + mac);
                     device.Mac = mac;
                 }
                 else
@@ -79,7 +80,7 @@ namespace MiddleWare.ZK
                 res = axCZKEM1.GetVendor(ref vendor);
                 if (res)
                 {
-                    Console.WriteLine("3. Vendor: " + vendor);
+                    LogUtil.Debug("3. Vendor: " + vendor);
                     device.Vendor = vendor;
                 }
                 else
@@ -91,7 +92,7 @@ namespace MiddleWare.ZK
                 res = axCZKEM1.GetProductCode(machineNumber, out deviceName);
                 if (res)
                 {
-                    Console.WriteLine("4. Device Name: " + deviceName);
+                    LogUtil.Debug("4. Device Name: " + deviceName);
                     device.Name = deviceName;
                 }
                 else
@@ -104,7 +105,7 @@ namespace MiddleWare.ZK
                 if (res)
                 {
                     device.FirmWare = firmVer;
-                    Console.WriteLine("5. FirmWare version: " + firmVer);
+                    LogUtil.Debug("5. FirmWare version: " + firmVer);
                 }
                 else
                 {
@@ -116,7 +117,7 @@ namespace MiddleWare.ZK
                 if (res)
                 {
                     device.Platform = platform;
-                    Console.WriteLine("6. Platform: " + platform);
+                    LogUtil.Debug("6. Platform: " + platform);
                 }
                 else
                 {
@@ -127,7 +128,7 @@ namespace MiddleWare.ZK
                 res = axCZKEM1.GetDeviceStrInfo(machineNumber, 1, out prodTime);
                 if (res)
                 {
-                    Console.WriteLine("7. Device info (product time): " + prodTime);
+                    LogUtil.Debug("7. Device info (product time): " + prodTime);
                     DateTime temp;
                     res = DateTime.TryParse(prodTime, out temp);
                     if (res)
@@ -231,14 +232,14 @@ namespace MiddleWare.ZK
         private void AxCZKEM1_OnDisConnected()
         {
             string msg = "Disconnected from device: " + ip;
-            Console.WriteLine(msg);
+            LogUtil.Debug(msg);
             isConnected = false;
         }
 
         private void AxCZKEM1_OnConnected()
         {
             string msg = "Connected to device: " + ip;
-            Console.WriteLine(msg);
+            LogUtil.Debug(msg);
             isConnected = true;
         }
 
@@ -287,7 +288,7 @@ namespace MiddleWare.ZK
                     break;
             }
 
-            Console.WriteLine(msg);
+            LogUtil.Debug(msg);
         }
     }
 

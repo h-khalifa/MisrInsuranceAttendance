@@ -41,7 +41,7 @@
           <Property Name="Desc" Type="nvarchar" MaxLength="50" />
           <Property Name="LocationDesc" Type="nvarchar" MaxLength="50" />
           <Property Name="IP" Type="nvarchar" MaxLength="50" />
-          <Property Name="Port" Type="tinyint" />
+          <Property Name="Port" Type="int" />
           <Property Name="Mac" Type="nvarchar" MaxLength="50" />
           <Property Name="Model" Type="nvarchar" MaxLength="50" />
           <Property Name="BranchID" Type="int" />

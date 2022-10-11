@@ -28,9 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.STS_ZK_Comm = new System.ServiceProcess.ServiceProcessInstaller();
+            this.STS_ZK = new System.ServiceProcess.ServiceInstaller();
+            // 
+            // STS_ZK_Comm
+            // 
+            this.STS_ZK_Comm.Account = System.ServiceProcess.ServiceAccount.LocalService;
+            this.STS_ZK_Comm.Password = null;
+            this.STS_ZK_Comm.Username = null;
+            // 
+            // STS_ZK
+            // 
+            this.STS_ZK.ServiceName = "STS_ZK_Communication";
+            // 
+            // ProjectInstaller
+            // 
+            this.Installers.AddRange(new System.Configuration.Install.Installer[] {
+            this.STS_ZK_Comm,
+            this.STS_ZK});
+
         }
 
         #endregion
+
+        private System.ServiceProcess.ServiceProcessInstaller STS_ZK_Comm;
+        private System.ServiceProcess.ServiceInstaller STS_ZK;
     }
 }
