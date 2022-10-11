@@ -51,11 +51,14 @@ namespace MiddleWare
                         }
                         else
                         {
-                            LogUtil.Debug("Getting All Logs");
+                            LogUtil.Debug("Getting All Logs -----> only last month");
+
+                            //logs = communicator.GetAllAttendance();
+                            DateTime temp = DateTime.Now;
+                            logs = communicator.GetAttendanceByPeriod(temp.AddMonths(-1), temp);
                             
-                            logs = communicator.GetAllAttendance();
-                            connTime = DateTime.Now; //after finishing the fetch.
                         }
+                        connTime = DateTime.Now; //after finishing the fetch.
                         communicator.Disconnect();
 
                         LogUtil.Debug("Total found logs: " + logs.Count);
