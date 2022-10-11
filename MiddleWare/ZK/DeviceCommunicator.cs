@@ -18,10 +18,11 @@ namespace MiddleWare.ZK
         bool isConnected;
         int machineNumber = 1;
         string ZKDateTimeFormat = "yyyy-MM-dd hh:mm:ss";
+        public string LatestError { get; set; }
 
         public DeviceCommunicator(string Ip, int Port)
         {
-            ip = Ip;
+            ip = Ip.Trim();
             port = Port;
         }
 
@@ -289,6 +290,7 @@ namespace MiddleWare.ZK
             }
 
             LogUtil.Debug(msg);
+            LatestError = msg;
         }
     }
 

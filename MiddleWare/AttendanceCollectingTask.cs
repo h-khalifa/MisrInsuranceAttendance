@@ -37,6 +37,7 @@ namespace MiddleWare
                 {
                     LogUtil.Debug("The device: " + device.IP);
                     communicator = new DeviceCommunicator(device.IP, (int)device.Port.Value);
+                    DateTime connTime;
                     bool connected = communicator.Connect();
                     if (connected)
                     {
@@ -45,12 +46,15 @@ namespace MiddleWare
                         if (latestConn.HasValue)
                         {
                             LogUtil.Debug("Getting Logs from: " + latestConn.Value);
-                            logs = communicator.GetAttendanceByPeriod(latestConn.Value, DateTime.Now);
+                            connTime = DateTime.Now;
+                            logs = communicator.GetAttendanceByPeriod(latestConn.Value, connTime);
                         }
                         else
                         {
                             LogUtil.Debug("Getting All Logs");
+                            
                             logs = communicator.GetAllAttendance();
+                            connTime = DateTime.Now; //after finishing the fetch.
                         }
                         communicator.Disconnect();
 
@@ -64,7 +68,7 @@ namespace MiddleWare
                             EmployeID = db.EmployeRepo.GetOrCreateEmployeByCode(l.EmpCode).ID,
                         });
                         db.LogsRepo.AddRange(attendanceLogs);
-                        device.LatestLogTime = DateTime.Now;
+                        device.LatestLogTime = connTime;
                         db.DevicesRepo.Edit(device);
                         db.Submit();
                     }
@@ -74,7 +78,7 @@ namespace MiddleWare
                     }
                 }
 
-
+                db.Dispose();
             }
             catch(Exception ex)
             {
