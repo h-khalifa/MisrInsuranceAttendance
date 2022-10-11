@@ -81,6 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\portalmodels.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\EmployesRepo.cs" />
     <Compile Include="Enums\OrderBy.cs" />
