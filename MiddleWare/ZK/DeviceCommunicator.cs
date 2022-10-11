@@ -284,6 +284,12 @@ namespace MiddleWare.ZK
                 case 201:
                     msg = "Device is busy";
                     break;
+                case -307:
+                    msg = "Connection timeout";
+                    break;
+                case -100:
+                    msg = "the data does not exist";
+                    break;
                 default:
                     msg = "undefinded error code: " + idwErrorCode;
                     break;

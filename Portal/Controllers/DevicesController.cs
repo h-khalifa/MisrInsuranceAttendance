@@ -127,7 +127,7 @@ namespace Portal.Controllers
             {
                 string link = "api/Devices/ConnectAndSave?ip=" + ip + "&port=" + port;
                 WebClient client = new WebClient();
-                client.BaseAddress = "http://localhost:4370/";
+                client.BaseAddress = System.Configuration.ConfigurationManager.AppSettings["MiddlewareBaseAddress"].ToString();
                 string id = client.DownloadString(link);
                 return new HttpStatusCodeResult(HttpStatusCode.OK, id);
             }
