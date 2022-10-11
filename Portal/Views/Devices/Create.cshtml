@@ -173,10 +173,6 @@
                 window.location.href = '/Devices/Edit/' + d2.statusText;
             },
             error: function (p1, p2, p3) {
-                console.log(p1);
-                console.log(p2);
-                console.log(p3);
-                console.log((p1.responseText));
                 Swal.fire({
                     icon: 'error',
                     title: p1.status,
