@@ -120,6 +120,37 @@ namespace Portal.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Connect(string ip, string port)
+        {
+            try
+            {
+                string link = "api/Devices/ConnectAndSave?ip=" + ip + "&port=" + port;
+                WebClient client = new WebClient();
+                client.BaseAddress = "http://localhost:4370/";
+                string id = client.DownloadString(link);
+                return new HttpStatusCodeResult(HttpStatusCode.OK, id);
+            }
+            catch(WebException exWeb)
+            {
+                HttpWebResponse response = (System.Net.HttpWebResponse)exWeb.Response;
+                //switch (response.StatusCode)
+                //{
+                //    case (HttpStatusCode.Conflict):
+                //        break;
+                //    case (HttpStatusCode.BadGateway):
+                //        break;
+                //    case (HttpStatusCode.InternalServerError):
+                //        break;
+                //}
+
+                var temp = new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd();
+                dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(temp);
+
+                return new HttpStatusCodeResult(response.StatusCode, obj);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

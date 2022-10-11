@@ -30,10 +30,10 @@ namespace MiddleWare.Controllers
                 Ip = Ip.Trim();
                 UnitOfWork db = new UnitOfWork(new DataAceess.Models.AttendanceEntities(), new EmployesRepository(), new BaseRepository<Branch>(), new BaseRepository<FingerPrintDevice>(), new BaseRepository<AttendanceLog>());
 
-                var temp = db.DevicesRepo.Find(d => d.IP == Ip && d.Port == Port);
+                var temp = db.DevicesRepo.FindAll(d => d.IP == Ip && d.Port == Port).ToList();
                 int deviceID = -1;
                 
-                if (temp == null)
+                if (temp.Count()==0)
                 {
                     DeviceCommunicator communicator = new DeviceCommunicator(Ip, Port);
 
@@ -67,8 +67,8 @@ namespace MiddleWare.Controllers
                 }
                 else
                 {
-                    deviceID = temp.ID;
-                    return Request.CreateResponse(HttpStatusCode.Conflict, "The Information entered already existing with ID: " + temp.ID);
+                    LogUtil.Debug("found similar devices: " + temp.Count());
+                    return Request.CreateResponse(HttpStatusCode.Conflict, "The Information entered already existing with ID: " + temp.First().ID);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, deviceID);
             }
