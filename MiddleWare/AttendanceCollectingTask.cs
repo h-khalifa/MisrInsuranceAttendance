@@ -27,12 +27,15 @@ namespace MiddleWare
 
                 UnitOfWork db = new UnitOfWork(new DataAceess.Models.AttendanceEntities(), new EmployesRepository(), new BaseRepository<Branch>(), new BaseRepository<FingerPrintDevice>(), new BaseRepository<AttendanceLog>());
 
-                var devices = db.DevicesRepo.GetAll();
+                var devices = db.DevicesRepo.GetAll().ToList();
+
+                LogUtil.Debug("Number of devices found: " + devices.Count());
 
                 DeviceCommunicator communicator;
 
                 foreach (var device in devices)
                 {
+                    LogUtil.Debug("The device: " + device.IP);
                     communicator = new DeviceCommunicator(device.IP, (int)device.Port.Value);
                     bool connected = communicator.Connect();
                     if (connected)
@@ -41,14 +44,17 @@ namespace MiddleWare
                         var latestConn = device.LatestLogTime;
                         if (latestConn.HasValue)
                         {
+                            LogUtil.Debug("Getting Logs from: " + latestConn.Value);
                             logs = communicator.GetAttendanceByPeriod(latestConn.Value, DateTime.Now);
                         }
                         else
                         {
+                            LogUtil.Debug("Getting All Logs");
                             logs = communicator.GetAllAttendance();
                         }
                         communicator.Disconnect();
 
+                        LogUtil.Debug("Total found logs: " + logs.Count);
 
                         IEnumerable<AttendanceLog> attendanceLogs = logs.Select(l => new AttendanceLog()
                         {

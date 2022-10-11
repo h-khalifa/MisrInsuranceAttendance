@@ -19,7 +19,6 @@ namespace MiddleWare
         static void Main()
         {
             TasksScheduling();
-            LogUtil.Debug("SERVICE STARTED!");
 
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
@@ -30,6 +29,7 @@ namespace MiddleWare
         }
         static async Task TasksScheduling()
         {
+            LogUtil.Debug("quartz.net scheduling started...");
             StdSchedulerFactory factory = new StdSchedulerFactory();
             IScheduler scheduler = await factory.GetScheduler();
             await scheduler.Start();
