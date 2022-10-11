@@ -25,7 +25,7 @@ namespace DataAceess.Models
         public string Desc { get; set; }
         public string LocationDesc { get; set; }
         public string IP { get; set; }
-        public Nullable<byte> Port { get; set; }
+        public Nullable<long> Port { get; set; }
         public string Mac { get; set; }
         public string Model { get; set; }
         public Nullable<int> BranchID { get; set; }

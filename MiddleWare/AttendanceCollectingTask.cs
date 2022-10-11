@@ -64,6 +64,8 @@ namespace MiddleWare
                             EmployeID = db.EmployeRepo.GetOrCreateEmployeByCode(l.EmpCode).ID,
                         });
                         db.LogsRepo.AddRange(attendanceLogs);
+                        device.LatestLogTime = DateTime.Now;
+                        db.DevicesRepo.Edit(device);
                         db.Submit();
                     }
                     else
@@ -78,6 +80,7 @@ namespace MiddleWare
             {
                 LogUtil.Error(ex);
             }
+            LogUtil.Debug("Scheduled task ended!.");
             return Task.CompletedTask;
         }
     }
