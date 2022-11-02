@@ -129,5 +129,23 @@ namespace MiddleWare.Controllers
             }
             
         }
+
+        [HttpGet]
+        public HttpResponseMessage SyncAttendance()
+        {
+            string link = Request.RequestUri.ToString();
+            LogUtil.Debug(" DevicesController Called: " + link);
+            AttendanceCollectingJob.Exe();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public HttpResponseMessage ServiceStatus()
+        {
+            string link = Request.RequestUri.ToString();
+            LogUtil.Debug(" DevicesController Called: " + link);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }
