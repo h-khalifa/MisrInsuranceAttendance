@@ -187,11 +187,16 @@ namespace MiddleWare.ZK
         }
         public List<AttLog> GetAttendanceByPeriod(DateTime starting, DateTime ending)
         {
+            
+            LogUtil.Debug("test - 0" + starting.ToLongDateString() + " to " + ending.ToLongDateString());
             List<AttLog> AttLogs = new List<AttLog>();
-
+            LogUtil.Debug("test - 1");
             axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+            LogUtil.Debug("test - 2");
+            
             if (axCZKEM1.ReadTimeGLogData(machineNumber, starting.ToString(ZKDateTimeFormat), ending.ToString(ZKDateTimeFormat)))
             {
+                LogUtil.Debug("test - 3");
                 string sdwEnrollNumber = "";
                 int idwVerifyMode = 0;
                 int idwInOutMode = 0;
@@ -206,6 +211,7 @@ namespace MiddleWare.ZK
                 while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
                             out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
                 {
+                    LogUtil.Debug("test - 4");
                     AttLog log = new AttLog()
                     {
                         AttStatus = (dwInOutMode)idwInOutMode,
@@ -218,9 +224,11 @@ namespace MiddleWare.ZK
             }
             else
             {
+                LogUtil.Debug("test - else 0");
                 LogError();
             }
             axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+            LogUtil.Debug("test - 5");
             return AttLogs;
         }
 
